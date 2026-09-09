@@ -16,7 +16,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var emailInput: EditText
     private lateinit var passwordInput: EditText
     private lateinit var loginButton: Button
-    private lateinit var demoLoginButton: Button
     private lateinit var registerLink: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,15 +33,10 @@ class LoginActivity : AppCompatActivity() {
         emailInput = findViewById(R.id.emailInput)
         passwordInput = findViewById(R.id.passwordInput)
         loginButton = findViewById(R.id.loginButton)
-        demoLoginButton = findViewById(R.id.demoLoginButton)
         registerLink = findViewById(R.id.registerLink)
 
         loginButton.setOnClickListener {
             performLogin()
-        }
-
-        demoLoginButton.setOnClickListener {
-            performDemoLogin()
         }
 
         registerLink.setOnClickListener {
@@ -67,20 +61,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun performDemoLogin() {
-        setLoading(true)
-        UserSessionManager.login(this, "demo", "") { result ->
-            setLoading(false)
-            result.onSuccess { user ->
-                Toast.makeText(this, "Signed in as ${user.name} (Demo)", Toast.LENGTH_SHORT).show()
-                navigateToMain()
-            }
-        }
-    }
-
     private fun setLoading(loading: Boolean) {
         loginButton.isEnabled = !loading
-        demoLoginButton.isEnabled = !loading
         loginButton.text = if (loading) "Authenticating..." else "Sign In"
     }
 

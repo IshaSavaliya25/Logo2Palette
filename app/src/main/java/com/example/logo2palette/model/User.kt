@@ -6,6 +6,6 @@ data class User(
     val id: String,
     val name: String,
     val email: String,
-    val companyName: String = "Brand Designer",
+    val companyName: String = "",
     val createdAt: Long = System.currentTimeMillis()
 ) : Serializable

@@ -227,6 +227,10 @@ class MainActivity : AppCompatActivity() {
             imagePicker.launch("image/*")
         }
 
+        logoImage.setOnClickListener {
+            imagePicker.launch("image/*")
+        }
+
         generateButton.setOnClickListener {
             paletteVersion = 0
             generatePalette()
@@ -310,8 +314,14 @@ class MainActivity : AppCompatActivity() {
         val palette = generatedPalette ?: return
         val user = UserSessionManager.getCurrentUser(this) ?: return
 
-        PaletteHistoryManager.savePalette(this, user.id, "Brand Palette #${paletteVersion + 1}", palette)
-        Toast.makeText(this, "⭐ Saved to your profile!", Toast.LENGTH_SHORT).show()
+        PaletteHistoryManager.savePalette(
+            context = this,
+            userId = user.id,
+            title = "Brand Palette #${paletteVersion + 1}",
+            palette = palette,
+            logoBitmap = selectedBitmap
+        )
+        Toast.makeText(this, "⭐ Saved to your profile with logo!", Toast.LENGTH_SHORT).show()
     }
 
     // =========================================================
@@ -364,24 +374,24 @@ class MainActivity : AppCompatActivity() {
             val textColorInt = ColorUtils.getContrastTextColor(color)
 
             val contrastRatio = ColorUtils.calculateContrastRatio(textColorInt, color)
-            val badgeLabel = ColorUtils.getWcagBadge(contrastRatio)
+            val badgeLabel = ColorUtils.getWcagBadgeShort(contrastRatio)
 
             // Color circle swatch
             swatchView.background = GradientDrawable().apply {
                 setColor(color)
-                cornerRadius = 24f
+                cornerRadius = 14f
                 setStroke(2, Color.parseColor("#E0E0E0"))
             }
 
-            hexTextView.text = "$hexColorStr  •  $badgeLabel"
+            hexTextView.text = hexColorStr
 
-            // Sample badge pill with guaranteed contrast text
-            badgeTextView.text = " Sample Text "
+            // Compact WCAG contrast badge
+            badgeTextView.text = badgeLabel
             badgeTextView.setTextColor(textColorInt)
             badgeTextView.background = GradientDrawable().apply {
                 setColor(color)
-                cornerRadius = 16f
-                setStroke(1, Color.parseColor("#CCCCCC"))
+                cornerRadius = 8f
+                setStroke(1, Color.parseColor("#D0D0D0"))
             }
 
             cardView.setOnClickListener {

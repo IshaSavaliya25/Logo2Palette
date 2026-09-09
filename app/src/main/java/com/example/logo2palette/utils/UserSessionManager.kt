@@ -163,13 +163,6 @@ object UserSessionManager {
     ) {
         val cleanEmail = email.trim().lowercase()
 
-        if (cleanEmail == "demo" || cleanEmail == "demo@logo2palette.com") {
-            val demoUser = getOrCreateDemoUser(context)
-            loginDirect(context, demoUser)
-            onResult(Result.success(demoUser))
-            return
-        }
-
         val auth = getFirebaseAuth()
         if (auth != null && pass.isNotEmpty()) {
             auth.signInWithEmailAndPassword(cleanEmail, pass)
@@ -267,22 +260,6 @@ object UserSessionManager {
         users.removeAll { it.id == user.id || it.email == user.email }
         users.add(user)
         saveAllUsers(context, users)
-    }
-
-    fun getOrCreateDemoUser(context: Context): User {
-        val users = getAllUsers(context).toMutableList()
-        val demo = users.find { it.email == "demo@logo2palette.com" }
-        if (demo != null) return demo
-
-        val newDemo = User(
-            id = "demo_user_id_101",
-            name = "Alex Designer",
-            email = "demo@logo2palette.com",
-            companyName = "Creative Studio Co."
-        )
-        users.add(newDemo)
-        saveAllUsers(context, users)
-        return newDemo
     }
 
     private fun registerLocally(

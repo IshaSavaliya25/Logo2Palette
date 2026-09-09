@@ -1,12 +1,15 @@
 package com.example.logo2palette
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +22,7 @@ import com.example.logo2palette.model.User
 import com.example.logo2palette.utils.ColorUtils
 import com.example.logo2palette.utils.PaletteHistoryManager
 import com.example.logo2palette.utils.UserSessionManager
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -77,10 +81,15 @@ class ProfileActivity : AppCompatActivity() {
 
         currentUser = user
 
-        avatarBadge.text = user.name.take(1).uppercase()
+        avatarBadge.text = if (user.name.isNotBlank()) user.name.take(1).uppercase() else "U"
         userNameText.text = user.name
         userEmailText.text = user.email
-        userCompanyText.text = user.companyName
+        if (user.companyName.isNotBlank()) {
+            userCompanyText.text = user.companyName
+            userCompanyText.visibility = View.VISIBLE
+        } else {
+            userCompanyText.visibility = View.GONE
+        }
 
         PaletteHistoryManager.getUserSavedPalettesAsync(this, user.id) { savedList ->
             savedCountText.text = "${savedList.size} Saved"
@@ -103,6 +112,7 @@ class ProfileActivity : AppCompatActivity() {
         list.forEach { item ->
             val card = inflater.inflate(R.layout.item_saved_palette, palettesContainer, false)
 
+            val logoIv = card.findViewById<ImageView>(R.id.paletteLogoImage)
             val titleTv = card.findViewById<TextView>(R.id.paletteTitle)
             val dateTv = card.findViewById<TextView>(R.id.paletteDate)
 
@@ -119,6 +129,9 @@ class ProfileActivity : AppCompatActivity() {
 
             titleTv.text = item.title
             dateTv.text = dateFormat.format(Date(item.createdAt))
+
+            // Display Logo Thumbnail
+            loadLogoImage(item, logoIv)
 
             setSwatchBg(s1, item.palette.primary)
             setSwatchBg(s2, item.palette.secondary)
@@ -153,6 +166,35 @@ class ProfileActivity : AppCompatActivity() {
 
             palettesContainer.addView(card)
         }
+    }
+
+    private fun loadLogoImage(item: SavedPalette, imageView: ImageView) {
+        if (!item.logoPath.isNullOrBlank() && File(item.logoPath).exists()) {
+            try {
+                val bmp = BitmapFactory.decodeFile(item.logoPath)
+                if (bmp != null) {
+                    imageView.setImageBitmap(bmp)
+                    return
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        if (!item.logoBase64.isNullOrBlank()) {
+            try {
+                val bytes = Base64.decode(item.logoBase64, Base64.DEFAULT)
+                val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                if (bmp != null) {
+                    imageView.setImageBitmap(bmp)
+                    return
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        imageView.setImageResource(R.drawable.upload_box)
     }
 
     private fun setSwatchBg(view: View, hex: String) {

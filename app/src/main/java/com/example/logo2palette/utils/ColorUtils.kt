@@ -106,6 +106,18 @@ object ColorUtils {
     }
 
     /**
+     * Compact badge for grid view
+     */
+    fun getWcagBadgeShort(contrastRatio: Double): String {
+        return when {
+            contrastRatio >= 7.0 -> "AAA"
+            contrastRatio >= 4.5 -> "AA"
+            contrastRatio >= 3.0 -> "AA+"
+            else -> "Pass"
+        }
+    }
+
+    /**
      * Convert Color Int to 6-character uppercase Hex String (#RRGGBB).
      */
     fun colorToHex(color: Int): String {

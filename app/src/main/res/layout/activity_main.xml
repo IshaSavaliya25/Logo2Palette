@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -11,13 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="40dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="32dp">
 
         <!-- ===================================================== -->
-        <!-- HEADER -->
+        <!-- TOP APP BAR -->
         <!-- ===================================================== -->
 
         <LinearLayout
@@ -35,9 +36,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logo2Palette"
+                    android:text="🎨 Logo2Palette"
                     android:textColor="@color/primary"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium" />
 
@@ -45,9 +46,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Smart Color Generator for Web &amp; Apps"
+                    android:text="Smart Color System Generator"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -55,137 +56,125 @@
             <Button
                 android:id="@+id/profileButton"
                 android:layout_width="wrap_content"
-                android:layout_height="44dp"
+                android:layout_height="38dp"
                 android:background="@drawable/button_secondary"
                 app:backgroundTint="@null"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:text="👤 Profile"
                 android:textAllCaps="false"
                 android:textColor="@color/button_secondary_text_color"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
 
         <!-- ===================================================== -->
-        <!-- HERO -->
-        <!-- ===================================================== -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="24dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Turn your logo into a&#10;usable color system."
-                android:textColor="@color/text_primary"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:lineSpacingExtra="3dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Upload your brand logo and discover accessible colors with guaranteed WCAG text visibility for your website or mobile UI."
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:lineSpacingExtra="2dp" />
-
-        </LinearLayout>
-
-
-        <!-- ===================================================== -->
-        <!-- UPLOAD CARD -->
+        <!-- COMPACT INTERACTIVE UPLOAD & GENERATE CARD -->
         <!-- ===================================================== -->
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="20dp"
             app:cardElevation="2dp"
             app:cardBackgroundColor="@color/surface">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:padding="20dp">
+                android:padding="16dp">
 
-                <ImageView
-                    android:id="@+id/logoImage"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:scaleType="centerInside"
-                    android:padding="20dp"
-                    android:contentDescription="Logo preview" />
-
-                <TextView
-                    android:id="@+id/uploadTitle"
-                    android:layout_width="wrap_content"
+                <!-- UPLOAD DROP ZONE ROW -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Upload your logo"
-                    android:textColor="@color/text_primary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="PNG • JPG • WEBP"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp" />
+                    <!-- LOGO PREVIEW BOX -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/upload_background">
+
+                        <ImageView
+                            android:id="@+id/logoImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/upload_box"
+                            android:scaleType="fitCenter"
+                            android:padding="10dp"
+                            android:contentDescription="Logo preview" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- UPLOAD ACTION TEXT & BUTTON -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select Brand Logo"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="PNG, JPG, WEBP formats"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+
+                        <Button
+                            android:id="@+id/uploadButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/button_secondary"
+                            app:backgroundTint="@null"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            android:text="📁 Browse File"
+                            android:textAllCaps="false"
+                            android:textColor="@color/button_secondary_text_color"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- PRIMARY GENERATE BUTTON -->
+                <Button
+                    android:id="@+id/generateButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/button_primary"
+                    app:backgroundTint="@null"
+                    android:text="✨ Generate Color Palette"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_primary_text_color"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:enabled="false" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
-
-        <!-- ===================================================== -->
-        <!-- UPLOAD BUTTON -->
-        <!-- ===================================================== -->
-
-        <Button
-            android:id="@+id/uploadButton"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_secondary"
-            app:backgroundTint="@null"
-            android:text="＋  Choose Logo"
-            android:textAllCaps="false"
-            android:textColor="@color/button_secondary_text_color"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <!-- ===================================================== -->
-        <!-- GENERATE BUTTON -->
-        <!-- ===================================================== -->
-
-        <Button
-            android:id="@+id/generateButton"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/button_primary"
-            app:backgroundTint="@null"
-            android:text="Generate Color Palette  →"
-            android:textAllCaps="false"
-            android:textColor="@color/button_primary_text_color"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:enabled="false" />
 
 
         <!-- ===================================================== -->
@@ -198,38 +187,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone"
-            android:layout_marginTop="32dp">
+            android:layout_marginTop="18dp">
 
-
-            <!-- ================================================= -->
-            <!-- RESULT HEADER -->
-            <!-- ================================================= -->
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Your Brand Color System"
-                android:textColor="@color/text_primary"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="WCAG 2.1 compliant tokens derived from your logo"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp" />
-
-
-            <!-- ================================================= -->
-            <!-- PALETTE NUMBER -->
-            <!-- ================================================= -->
-
+            <!-- SECTION TITLE & PALETTE PILL -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -237,67 +200,97 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Generated Swatches"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:text="Brand Palette"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/paletteNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_secondary"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:text="Palette 1"
                     android:textColor="@color/primary"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Tap any swatch to copy HEX code"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
 
             <!-- ================================================= -->
-            <!-- SWATCH CARDS (PRIMARY, SECONDARY, ACCENT, BG, SURFACE, TEXT) -->
+            <!-- 2-COLUMN COMPACT SWATCH GRID -->
             <!-- ================================================= -->
 
-            <!-- PRIMARY -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardPrimary"
+            <!-- ROW 1: PRIMARY & SECONDARY -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface">
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- PRIMARY -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPrimary"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <View
-                        android:id="@+id/swatchPrimary"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/button_primary" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/surface">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:id="@+id/swatchPrimary"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@drawable/button_primary" />
+
+                            <TextView
+                                android:id="@+id/primaryBadge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:text="AA"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="PRIMARY (Brand Accent)"
+                            android:layout_marginTop="8dp"
+                            android:text="Primary"
                             android:textColor="@color/text_primary"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -306,63 +299,64 @@
                             android:layout_height="wrap_content"
                             android:text="#6750A4"
                             android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:layout_marginTop="2dp" />
+                            android:textSize="12sp"
+                            android:layout_marginTop="1dp" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/primaryBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:text="Sample Text"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- SECONDARY -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardSecondary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- SECONDARY -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSecondary"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <View
-                        android:id="@+id/swatchSecondary"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/button_primary" />
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/surface">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:id="@+id/swatchSecondary"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@drawable/button_primary" />
+
+                            <TextView
+                                android:id="@+id/secondaryBadge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:text="AA"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SECONDARY (Supporting)"
+                            android:layout_marginTop="8dp"
+                            android:text="Secondary"
                             android:textColor="@color/text_primary"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -371,63 +365,73 @@
                             android:layout_height="wrap_content"
                             android:text="#9C7BCE"
                             android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:layout_marginTop="2dp" />
+                            android:textSize="12sp"
+                            android:layout_marginTop="1dp" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/secondaryBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:text="Sample Text"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
+            </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
-
-            <!-- ACCENT -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardAccent"
+            <!-- ROW 2: ACCENT & TEXT -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface">
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- ACCENT -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardAccent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <View
-                        android:id="@+id/swatchAccent"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/button_primary" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/surface">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:id="@+id/swatchAccent"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@drawable/button_primary" />
+
+                            <TextView
+                                android:id="@+id/accentBadge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:text="AA"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ACCENT (Highlight / CTA)"
+                            android:layout_marginTop="8dp"
+                            android:text="Accent"
                             android:textColor="@color/text_primary"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -436,193 +440,64 @@
                             android:layout_height="wrap_content"
                             android:text="#FFB74D"
                             android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:layout_marginTop="2dp" />
+                            android:textSize="12sp"
+                            android:layout_marginTop="1dp" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/accentBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:text="Sample Text"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- BACKGROUND -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- TEXT PRIMARY -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardText"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <View
-                        android:id="@+id/swatchBackground"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/button_primary" />
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/surface">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:id="@+id/swatchText"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@drawable/button_primary" />
+
+                            <TextView
+                                android:id="@+id/textBadge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:text="AAA"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="BACKGROUND (Page BG)"
+                            android:layout_marginTop="8dp"
+                            android:text="Text"
                             android:textColor="@color/text_primary"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/backgroundHex"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="#F8F7FC"
-                            android:textColor="@color/text_secondary"
                             android:textSize="13sp"
-                            android:layout_marginTop="2dp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/backgroundBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:text="Sample Text"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- SURFACE -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardSurface"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <View
-                        android:id="@+id/swatchSurface"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/button_primary" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="SURFACE (Card Surface)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/surfaceHex"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="#FFFFFF"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:layout_marginTop="2dp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/surfaceBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:text="Sample Text"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- TEXT PRIMARY -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <View
-                        android:id="@+id/swatchText"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/button_primary" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TEXT PRIMARY (Body Text)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -631,149 +506,254 @@
                             android:layout_height="wrap_content"
                             android:text="#1D1B20"
                             android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:layout_marginTop="2dp" />
+                            android:textSize="12sp"
+                            android:layout_marginTop="1dp" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textBadge"
-                        android:layout_width="wrap_content"
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <!-- ROW 3: BACKGROUND & SURFACE -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <!-- BACKGROUND -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:text="Sample Text"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
-            </androidx.cardview.widget.CardView>
+                            <View
+                                android:id="@+id/swatchBackground"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@drawable/button_primary" />
+
+                            <TextView
+                                android:id="@+id/backgroundBadge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:text="AA"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Background"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/backgroundHex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#F8F7FC"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:layout_marginTop="1dp" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- SURFACE -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSurface"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:id="@+id/swatchSurface"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@drawable/button_primary" />
+
+                            <TextView
+                                android:id="@+id/surfaceBadge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp"
+                                android:text="AA"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Surface"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/surfaceHex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#FFFFFF"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:layout_marginTop="1dp" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
 
 
             <!-- ================================================= -->
-            <!-- INFORMATION -->
+            <!-- ACTION TOOLBAR -->
             <!-- ================================================= -->
 
-            <TextView
+            <!-- PRIMARY ACTIONS: TRY ANOTHER & PREVIEW -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Tap any color card to copy its HEX code."
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp"
-                android:gravity="center" />
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
 
+                <Button
+                    android:id="@+id/anotherPaletteButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/button_secondary"
+                    app:backgroundTint="@null"
+                    android:text="🎨 Try Another"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_secondary_text_color"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:enabled="false" />
 
-            <!-- ================================================= -->
-            <!-- SAVE PALETTE TO PROFILE -->
-            <!-- ================================================= -->
+                <Button
+                    android:id="@+id/previewButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1.2"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/button_primary"
+                    app:backgroundTint="@null"
+                    android:text="👁 Preview UI"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_primary_text_color"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:enabled="false" />
 
-            <Button
-                android:id="@+id/savePaletteButton"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="18dp"
-                android:background="@drawable/button_secondary"
-                app:backgroundTint="@null"
-                android:text="⭐  Save Palette to Profile"
-                android:textAllCaps="false"
-                android:textColor="@color/button_secondary_text_color"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:enabled="false" />
+            </LinearLayout>
 
-            <!-- ================================================= -->
-            <!-- TRY ANOTHER PALETTE -->
-            <!-- ================================================= -->
-
-            <Button
-                android:id="@+id/anotherPaletteButton"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="18dp"
-                android:background="@drawable/button_secondary"
-                app:backgroundTint="@null"
-                android:text="🎨  Try Another Palette"
-                android:textAllCaps="false"
-                android:textColor="@color/button_secondary_text_color"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:enabled="false" />
-
-
-            <!-- ================================================= -->
-            <!-- PREVIEW WEBSITE UI -->
-            <!-- ================================================= -->
-
-            <Button
-                android:id="@+id/previewButton"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_primary"
-                app:backgroundTint="@null"
-                android:text="👁  Preview Web &amp; App UI"
-                android:textAllCaps="false"
-                android:textColor="@color/button_primary_text_color"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:enabled="false" />
-
-
-            <!-- ================================================= -->
-            <!-- DOWNLOAD PDF REPORT -->
-            <!-- ================================================= -->
-
-            <Button
-                android:id="@+id/pdfButton"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_secondary"
-                app:backgroundTint="@null"
-                android:text="📄  Download PDF Report"
-                android:textAllCaps="false"
-                android:textColor="@color/button_secondary_text_color"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:enabled="false" />
-
-
-            <!-- ================================================= -->
-            <!-- EXPORT DEVELOPER CODE -->
-            <!-- ================================================= -->
-
-            <Button
-                android:id="@+id/exportCodeButton"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_secondary"
-                app:backgroundTint="@null"
-                android:text="💻  Export Developer Code"
-                android:textAllCaps="false"
-                android:textColor="@color/button_secondary_text_color"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:enabled="false" />
-
-
-            <!-- ================================================= -->
-            <!-- BOTTOM DESCRIPTION -->
-            <!-- ================================================= -->
-
-            <TextView
+            <!-- SECONDARY ACTIONS: SAVE, PDF, CODE -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Try different palette variations until you find the perfect combination for your product."
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp"
-                android:gravity="center"
-                android:lineSpacingExtra="2dp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:id="@+id/savePaletteButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/button_secondary"
+                    app:backgroundTint="@null"
+                    android:text="⭐ Save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_secondary_text_color"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:enabled="false" />
+
+                <Button
+                    android:id="@+id/pdfButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/button_secondary"
+                    app:backgroundTint="@null"
+                    android:text="📄 PDF"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_secondary_text_color"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:enabled="false" />
+
+                <Button
+                    android:id="@+id/exportCodeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/button_secondary"
+                    app:backgroundTint="@null"
+                    android:text="💻 Code"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_secondary_text_color"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:enabled="false" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

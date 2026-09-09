@@ -7,5 +7,7 @@ data class SavedPalette(
     val userId: String,
     val title: String,
     val palette: ColorPalette,
+    val logoPath: String? = null,
+    val logoBase64: String? = null,
     val createdAt: Long = System.currentTimeMillis()
 ) : Serializable

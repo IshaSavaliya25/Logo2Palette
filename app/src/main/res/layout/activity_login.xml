@@ -111,20 +111,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- DEMO LOGIN BUTTON -->
-                <Button
-                    android:id="@+id/demoLoginButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/button_secondary"
-                    app:backgroundTint="@null"
-                    android:text="⚡  Quick Demo Login"
-                    android:textAllCaps="false"
-                    android:textColor="@color/button_secondary_text_color"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
