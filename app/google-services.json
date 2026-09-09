@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "807488292140",
+    "project_id": "logo2palette",
+    "storage_bucket": "logo2palette.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807488292140:android:cd5c24fa03af6011c01889",
+        "android_client_info": {
+          "package_name": "com.example.logo2palette"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5ECddoFIbrOl9g67EU4upBXRD0H1G3GE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
