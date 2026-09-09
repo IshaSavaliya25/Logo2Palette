@@ -3,9 +3,11 @@ package com.example.logo2palette
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -27,6 +29,12 @@ class PreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Ensure screenshot and screen recording are allowed
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            setRecentsScreenshotEnabled(true)
+        }
+
         @Suppress("DEPRECATION")
         palette = (intent.getSerializableExtra("palette") as? ColorPalette) ?: ColorPalette(
             primary = intent.getStringExtra("primary") ?: "#6750A4",
@@ -39,6 +47,11 @@ class PreviewActivity : AppCompatActivity() {
         )
 
         buildRootView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     private fun buildRootView() {

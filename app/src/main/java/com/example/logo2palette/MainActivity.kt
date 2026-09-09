@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -132,6 +133,12 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
+        // Ensure screenshot and screen recording are allowed
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            setRecentsScreenshotEnabled(true)
+        }
+
         // Strict Login Gate
         if (!UserSessionManager.isLoggedIn(this)) {
             val intent = Intent(this, LoginActivity::class.java)
@@ -148,6 +155,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
         if (!UserSessionManager.isLoggedIn(this)) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

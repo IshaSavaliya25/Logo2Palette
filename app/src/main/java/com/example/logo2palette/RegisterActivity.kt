@@ -1,7 +1,10 @@
 package com.example.logo2palette
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -22,12 +25,20 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+
+        // Ensure screenshot and screen recording are allowed
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            setRecentsScreenshotEnabled(true)
+        }
+
         setContentView(R.layout.activity_register)
 
         nameInput = findViewById(R.id.nameInput)
         companyInput = findViewById(R.id.companyInput)
         emailInput = findViewById(R.id.emailInput)
         passwordInput = findViewById(R.id.passwordInput)
+        passwordInput.transformationMethod = PasswordTransformationMethod.getInstance()
         registerButton = findViewById(R.id.registerButton)
         loginLink = findViewById(R.id.loginLink)
 
@@ -40,11 +51,26 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+    }
+
     private fun performRegistration() {
-        val name = nameInput.text.toString()
-        val company = companyInput.text.toString()
-        val email = emailInput.text.toString()
+        val name = nameInput.text.toString().trim()
+        val company = companyInput.text.toString().trim()
+        val email = emailInput.text.toString().trim()
         val password = passwordInput.text.toString()
+
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (password.length < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         setLoading(true)
 
@@ -57,7 +83,15 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }.onFailure { ex ->
-                Toast.makeText(this, ex.message ?: "Registration failed", Toast.LENGTH_LONG).show()
+                val rawMsg = ex.message ?: ""
+                val friendlyMsg = when {
+                    rawMsg.contains("already in use", ignoreCase = true) ->
+                        "This email is already registered. Please go back and sign in."
+                    rawMsg.contains("badly formatted", ignoreCase = true) ->
+                        "Please enter a valid email address."
+                    else -> rawMsg.ifBlank { "Registration failed. Please try again." }
+                }
+                Toast.makeText(this, friendlyMsg, Toast.LENGTH_LONG).show()
             }
         }
     }
